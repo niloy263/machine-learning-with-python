@@ -1,0 +1,73 @@
+#importing libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+df = pd.read_csv('dhaka homeprices.csv')
+
+df
+
+
+df.head()
+
+#linear regression, y = mx + c(here,area(x)=independent, price(y)=dependent )
+
+df.shape
+
+df.isnull().any()
+
+df.isnull().sum()
+
+x = df[['area']]
+y = df['price']
+
+# visualization
+
+plt.scatter(df['area'],df['price'],marker='+',color='red')
+plt.xlabel('Area in sq ft')
+plt.ylabel('Price in tk')
+plt.title('Homeprices in Dhaka')
+
+x
+
+
+
+y
+
+from sklearn.model_selection import train_test_split
+
+xtrain, xtest, ytrain, ytest = train_test_split(x,y, test_size=.30, random_state=1)
+
+xtrain
+
+xtest
+
+ytest
+
+ytrain
+
+from sklearn.linear_model import LinearRegression
+
+reg = LinearRegression()
+
+reg.fit(xtrain,ytrain)
+
+reg.predict(xtest)
+
+plt.scatter(df['area'],df['price'],marker='+',color='red')
+plt.xlabel('Area in sq ft')
+plt.ylabel('Price in tk')
+plt.title('Homeprices in Dhaka')
+plt.plot(df.area, reg.predict(df[['area']]))
+
+reg.predict([[3900]])
+
+#y = mx + c
+reg.coef_
+
+reg.intercept_
+
+y = 15.15228844*3900 + 6090.632202831752
+
+y
+
